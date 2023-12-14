@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+    <script src="./js/index.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>select your faves</h1>
+    <form action="/process" method="POST">
+        <label class="bubble" for="bubbleTea">tea</label> 
+        <div id="bubbleTeaButtons">
+            <button type="button" id="blackTea" name="bubbleTea" value="blackTea">Black Tea</button>
+            <button type="button" id="greenTea" name="bubbleTea" value="greenTea">Green Tea</button>
+            <button type="button" id="oolongTea" name="bubbleTea" value="oolongTea">Oolong Tea</button>
+        </div>
+    
+        <br>
+        <div id="toppingsDiv">
+            <label for="toppings" class="bubble">toppings</label> <br>
+            <input type="checkbox" id="pearls" name="toppings" value="pearls">
+            <label for="pearls">Pearls</label> <br>
+            <input type="checkbox" id="jelly" name="toppings" value="jelly">
+            <label for="jelly">Jelly</label> <br>
+            <input type="checkbox" id="pudding" name="toppings" value="pudding">
+            <label for="pudding">Pudding</label>
+        </div>
+
+    
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="selectedBubbleTeas"></div>
+
+
+</body>
+</html>
+    
+        <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>

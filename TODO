@@ -1,0 +1,14 @@
+* add express to process
+* add API
+* add mongo usage (we can store the generated list in mongo and retrieve?)
+
+
+ok so like my idea is the user inputs the different types of stuff they might want, selects that and the posts the form
+
+From the stuff selected, we randomly generate like 10 different combinations that are stored in mongodb and then showed back to the user in tinder form with cards
+
+Each "card" represents a boba combination and the affinity score (we use the API to generate):
+* tea 
+* toppings
+* picture? random cute one ig
+* affinity score
