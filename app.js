@@ -2,16 +2,29 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, '.env') }) 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+process.stdin.setEncoding("utf8");
+
+if (process.argv.length != 3) {
+    process.stdout.write(`Usage app.js portNumber`);
+    process.exit(1);
+  }
+
+let portNumber = (process.argv[2]);
+
 // Connect to MongoDB
-mongoose.connect('YOUR_MONGODB_CONNECTION_STRING', { useNewUrlParser: true, useUnifiedTopology: true });
+const uri = process.env.MONGO_CONNECTION_STRING;
+const databaseAndCollection = { db: 'CMSC335_DB', collection: 'matcha' };
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.get('/', (req, res) => {
@@ -23,5 +36,6 @@ app.get('/', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}: http://localhost:${PORT}`);
 });
+
