@@ -23,6 +23,13 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+app.post('/process', (req, res) => {
+    // Process your data here
+    console.log(req.body);
+    res.send('Data received');
+});
+
+
 // Add more routes as needed
 
 // Start the server

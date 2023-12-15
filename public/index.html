@@ -15,10 +15,13 @@
     <h1>select your faves</h1>
     <form action="/process" method="POST">
         <label class="bubble" for="bubbleTea">tea</label> 
-        <div id="bubbleTeaButtons">
-            <button type="button" id="blackTea" name="bubbleTea" value="blackTea">Black Tea</button>
-            <button type="button" id="greenTea" name="bubbleTea" value="greenTea">Green Tea</button>
-            <button type="button" id="oolongTea" name="bubbleTea" value="oolongTea">Oolong Tea</button>
+        <div id="bubbleTeaCheckboxes">
+            <input type="checkbox" id="blackTea" name="bubbleTea" value="blackTea">
+            <label for="blackTea">Black Tea</label> <br>
+            <input type="checkbox" id="greenTea" name="bubbleTea" value="greenTea">
+            <label for="greenTea">Green Tea</label> <br>
+            <input type="checkbox" id="oolongTea" name="bubbleTea" value="oolongTea">
+            <label for="oolongTea">Oolong Tea</label>
         </div>
     
         <br>
@@ -43,8 +46,3 @@
 </body>
 </html>
     
-        <input type="submit" value="Submit">
-    </form>
-    
-</body>
-</html>
