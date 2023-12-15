@@ -8,15 +8,6 @@ require("dotenv").config({ path: path.resolve(__dirname, '.env') })
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-process.stdin.setEncoding("utf8");
-
-if (process.argv.length != 3) {
-    process.stdout.write(`Usage app.js portNumber`);
-    process.exit(1);
-  }
-
-let portNumber = (process.argv[2]);
-
 // Connect to MongoDB
 const uri = process.env.MONGO_CONNECTION_STRING;
 const databaseAndCollection = { db: 'CMSC335_DB', collection: 'matcha' };
