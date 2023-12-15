@@ -1,0 +1,23 @@
+<!-- FILEPATH: /c:/Users/New User/OneDrive/Documents/CMSC335/matcha/public/match.ejs -->
+<!-- BEGIN: be15d9bcejpp -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Tea Information</title>
+</head>
+<body>
+    <h1>Bubble Tea Information</h1>
+    data: <%= data.length %>
+    <!-- BEGIN: Loop through data and display cards -->
+    <% data.forEach(function(item) { %>
+        <div class="card">
+            <h2>ID: <%= item.id %></h2>
+            <p>Bubble Tea: <%= item.bubbleTea %></p>
+            <p>Toppings: <%= item.toppings.join(', ') %></p>
+        </div>
+    <% }); %>
+    <!-- END: Loop through data and display cards -->
+
+</body>
+</html>
+<!-- END: be15d9bcejpp -->

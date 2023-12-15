@@ -1,0 +1,72 @@
+<!-- FILEPATH: /c:/Users/New User/OneDrive/Documents/CMSC335/matcha/public/match.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matcha</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="" alt="Card Image">
+        <div class="swipe-buttons">
+            <button class="swipe-button" onclick="swipeLeft()">Swipe Left</button>
+            <button class="swipe-button" onclick="swipeRight()">Swipe Right</button>
+        </div>
+    </div>
+
+    <script>
+        const cards = [
+            {
+                id: 'c7bedc0071f9a613254376e6e6e92c1032173342e5ea8a7fcfc8eddb89e42442',
+                bubbleTea: 'oolongTea',
+                toppings: ['pudding']
+            },
+            // Add more objects to the array as needed
+        ];
+
+        let currentCardIndex = 0;
+        const cardElement = document.querySelector('.card');
+        const imageElement = cardElement.querySelector('img');
+
+        function showCard() {
+            const currentCard = cards[currentCardIndex];
+            imageElement.src = currentCard.imageUrl;
+
+            const cardInfo = document.createElement('div');
+            cardInfo.textContent = `Tea: ${currentCard.bubbleTea}, Toppings: ${currentCard.toppings.join(', ')}`;
+            cardElement.appendChild(cardInfo);
+        }
+
+        function swipeLeft() {
+            // Do nothing for swipe left
+            // You can add animation or transition effects here if needed
+        }
+
+        function swipeRight() {
+            // Add the current card to the liked list
+            // You can implement the logic to add the card to the liked list here
+            // You can add animation or transition effects here if needed
+
+            // Move to the next card
+            currentCardIndex++;
+            if (currentCardIndex >= cards.length) {
+                currentCardIndex = 0;
+            } else if (cards.length === 0) {
+                // Show a message if there are no more cards
+                imageElement.src = '';
+                const noMoreCards = document.createElement('div');
+                noMoreCards.textContent = 'No more cards';
+                cardElement.appendChild(noMoreCards);
+            } else {
+                showCard();
+            }
+        }
+
+        // Show the first card initially
+        showCard();
+    </script>
+</body>
+</html>
