@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require("path");
 const crypto = require('crypto');
 const ejs = require('ejs');
+const axios = require('axios');
 
 require("dotenv").config({ path: path.resolve(__dirname, '.env') }) 
 
@@ -25,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/process', async (req, res) => {
-    // Process your data here
+
     let { bubbleTea, toppings } = req.body;
     if (typeof bubbleTea === 'string') {
         bubbleTea = [bubbleTea];
@@ -35,47 +36,67 @@ app.post('/process', async (req, res) => {
     }
     const id = createUserID(bubbleTea + toppings);
     const data = [];
-
-    for (let i = 0; i < 3; i++) {
-        const tea = getRandomTea(bubbleTea);
-        const topping = getRandomToppings(toppings);
-        data.push({ id: id, tea: tea, toppings: topping });
-    }
     
-    // Save the data to MongoDB
-    await postData(data);
+    const options = {
+        method: 'GET',
+        url: 'https://numbersapi.p.rapidapi.com/6/21/date',
+        params: {
+          fragment: 'true',
+          json: 'true'
+        },
+        headers: {
+          'X-RapidAPI-Key': '24c0482f43msh213f9a9e2b54becp1bcb0cjsnfb32becf2afe',
+          'X-RapidAPI-Host': 'numbersapi.p.rapidapi.com'
+        }
+      }
+    try {
+        for (let i = 0; i < 3; i++) {
+            const response = await axios.request(options);
+            const tea = getRandomTea(bubbleTea);
+            const topping = getRandomToppings(toppings);
+            data.push({ id: id, tea: tea, toppings: topping, fact: response.data.text });
+            
+        }
+        await postData(data);
 
-    res.send(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
-        <title>Form Submission Confirmation</title>
-    </head>
-    <body>
-        <h1>what you want</h1>
-        
-        <p>Thank you for submitting the form. The following information was sent:</p>
-        
-        <ul>
-            <li>Bubble Tea: ${bubbleTea}</li>
-            <li>Toppings: ${toppings} </li>
-        </ul>
-        
-        <form action="/match" method="post">
-            <input type="hidden" name="id" value="${id}">
-            <button type="submit">View your matches!</button>
-        </form>
-    </body>
-    </html>`);
+            // Save the data to MongoDB
+    
+
+        res.send(`<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="css/style.css">
+            <title>Form Submission Confirmation</title>
+        </head>
+        <body>
+            <h1>what you want</h1>
+            
+            <p>Thank you for submitting the form. The following information was sent:</p>
+            
+            <ul>
+                <li>Bubble Tea: ${bubbleTea}</li>
+                <li>Toppings: ${toppings} </li>
+            </ul>
+            
+            <form action="/match" method="post">
+                <input type="hidden" name="id" value="${id}">
+                <button type="submit">View your matches!</button>
+            </form>
+        </body>
+        </html>`);
+    } catch (error) {
+        console.error(error);
+    }
+
+
 }); 
 
 app.post('/match', async (req, res) => {
     // Get data from MongoDB
     const data = await getData(req.body.id);
     console.log(data.length);
-    
 
     // Render the match page
     res.render(__dirname + '/public/match.ejs', { data: data });
@@ -100,8 +121,8 @@ async function postData(data) {
         await client.connect();
         console.log('Connected to MongoDB: Posting Data');
         for (let i = 0; i < data.length; i++) {
-            const { id, tea, toppings } = data[i];
-            const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne({ id: id, bubbleTea: tea, toppings: toppings });
+            const { id, tea, toppings, fact } = data[i];
+            const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).insertOne({ id: id, bubbleTea: tea, toppings: toppings, fact: fact });
         }
     } catch (e) {
         console.error(e);

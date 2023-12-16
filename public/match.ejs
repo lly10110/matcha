@@ -4,6 +4,13 @@
 <html>
 <head>
     <title>Bubble Tea Information</title>
+    <link rel="stylesheet" href="/css/match.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+    <script src="/js/match.js"></script>
+
 </head>
 <body>
     <h1>Bubble Tea Information</h1>
@@ -14,6 +21,7 @@
             <h2>ID: <%= item.id %></h2>
             <p>Bubble Tea: <%= item.bubbleTea %></p>
             <p>Toppings: <%= item.toppings.join(', ') %></p>
+            <p>Fun fact: <%= item.fact %></p>
         </div>
     <% }); %>
     <!-- END: Loop through data and display cards -->
