@@ -13,12 +13,10 @@
 
 </head>
 <body>
-    <h1>Bubble Tea Information</h1>
-    data: <%= data.length %>
+    <h1>find ur perfect tea</h1>
     <!-- BEGIN: Loop through data and display cards -->
     <% data.forEach(function(item) { %>
         <div class="card">
-            <h2>ID: <%= item.id %></h2>
             <p>Bubble Tea: <%= item.bubbleTea %></p>
             <p>Toppings: <%= item.toppings.join(', ') %></p>
             <p>Fun fact: <%= item.fact %></p>

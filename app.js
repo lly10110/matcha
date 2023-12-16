@@ -104,6 +104,12 @@ app.post('/match', async (req, res) => {
     await deleteData(req.body.id);
 });
 
+app.get('/delete', async (req, res) => {
+    // Delete all data from MongoDB
+    await deleteAllData();
+    res.send('All data deleted');
+});
+
 // Add more routes as needed
 
 // Start the server
@@ -161,7 +167,20 @@ async function deleteData(id) {
         await client.close();
     }
 }
-
+// delete all data from mongodb
+async function deleteAllData() {
+    const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
+    try {
+        await client.connect();
+        console.log('Connected to MongoDB');
+        const result = await client.db(databaseAndCollection.db).collection(databaseAndCollection.collection).deleteMany({});
+        console.log(result);
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+}
 function createUserID(inputString) {
     const hash = crypto.createHash('sha256');
     hash.update(inputString);
