@@ -15,7 +15,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#bubbleTeaButtons button {
+.bubbleTeaButtons {
     background-color: #b2d9ad;
     border: 1px solid #b2d9ad;
     color: #f2fff0;
@@ -26,7 +26,7 @@ body {
     font-size: 16px;
     border-radius: 12px;
 }
-#bubbleTeaButtons button:hover {
+.bubbleTeaButtons :hover {
     background-color: #f2fff0;
     color: #b2d9ad;
     border: 1px solid #b2d9ad;

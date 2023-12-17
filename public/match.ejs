@@ -9,21 +9,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
-    <script src="/js/match.js"></script>
-
+    
 </head>
 <body>
     <h1>find ur perfect tea</h1>
     <!-- BEGIN: Loop through data and display cards -->
     <% data.forEach(function(item) { %>
         <div class="card">
-            <p>Bubble Tea: <%= item.bubbleTea %></p>
-            <p>Toppings: <%= item.toppings.join(', ') %></p>
-            <p>Fun fact: <%= item.fact %></p>
+            <h2>Bubble Tea </h2>
+            <p><%= item.bubbleTea %></p>
+            <h2>Toppings </h2>
+            <p><%= item.toppings.join(', ') %></p>
+            <h2>Fun fact</h2>
+            <p><%= item.fact %></p>
         </div>
     <% }); %>
     <!-- END: Loop through data and display cards -->
 
+    <button class="bubbleTeaButtons swipe-button-left"> swipe left </button>
+    <button class="bubbleTeaButtons swipe-button swipe-button-right"> swipe right </button>
+
+
+    <script>
+        let cards = Array.from(document.querySelectorAll('.card'));
+
+        let currentIndex = 0;
+
+        document.querySelector('.swipe-button-left').addEventListener('click', function() {
+            cards[currentIndex].style.display = 'none';
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            cards[currentIndex].style.display = 'block';
+        });
+
+        document.querySelector('.swipe-button-right').addEventListener('click', function() {
+            cards[currentIndex].style.display = 'none';
+            currentIndex = (currentIndex + 1) % cards.length;
+            cards[currentIndex].style.display = 'block';
+        });
+    </script>
 </body>
 </html>
 <!-- END: be15d9bcejpp -->
